@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AB-testsABP", "AB-testsABP.csproj", "{5D531439-23AB-4649-AF32-98735EBBA870}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExperimentABP", "ExperimentABP.csproj", "{5D531439-23AB-4649-AF32-98735EBBA870}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentABPTest", "..\ExperimentABPTest\ExperimentABPTest.csproj", "{DEBC4B1C-2CB3-4BAF-A218-AF6AF1BF05DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExperimentABPTest", "..\ExperimentABPTest\ExperimentABPTest.csproj", "{DEBC4B1C-2CB3-4BAF-A218-AF6AF1BF05DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
