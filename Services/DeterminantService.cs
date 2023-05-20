@@ -6,12 +6,13 @@ namespace ExperimentABP.Services
     public class DeterminantService : IDeterminantService
     {
       
-        readonly IDatabaseManager _databaseManager;
+        readonly IDatabaseManager _databaseManager;        
+
         private Random random = new Random();
-        public DeterminantService(IDatabaseManager databaseManager)
+        public DeterminantService(IDatabaseManager databaseManager, IDefaultCreator creator)
         {
-            this._databaseManager = databaseManager;
-        }
+            this._databaseManager = databaseManager;            
+        }       
         private int GetPercentQuery(int correct)
         {
             return random.Next(correct);
@@ -20,21 +21,19 @@ namespace ExperimentABP.Services
         {
             try
             {
-                var user = _databaseManager.GetUser(token);
-                var option = _databaseManager.GetUserOption(user.Id).Options.FirstOrDefault(x => x.Experiment.Name == nameExperiment);
-
+                var divace = _databaseManager.GetDevice(token);
+                var divOpt = _databaseManager.GetDeviceOptions(divace.Id);
+                var option = divOpt.FirstOrDefault(x => x.Option.Experiment.Name == nameExperiment).Option;
                 return option;
             }
             catch
             {
-                var user = new User();
-                user.Name = token;
-                _databaseManager.CreateUser(user);
-                user = _databaseManager.GetUser(token);
+                var divece = new Device();
+                divece = _databaseManager.CreateDevice(token);                
                 var exper = _databaseManager.GetExperiment(nameExperiment);
-                var options = _databaseManager.GetOption(exper);
+                var options = _databaseManager.GetOptions(exper.Id);
                 var option = Classification(nameExperiment, options);
-                _databaseManager.CreateUserOption(user, option);
+                _databaseManager.CreateUserOption(divece, option);
                 return option;
             }
         }
@@ -84,12 +83,8 @@ namespace ExperimentABP.Services
             }
             return result;
         }
-        public List<UserOptions> GetStatistic()
+        public List<DeviceOption> GetStatistic()
         {
-            //ResutDTO 
-            _databaseManager.GetUserOption(1004);
-            
-
             
             return null;
         }

@@ -10,6 +10,6 @@ namespace ExperimentABP.Services
         //Назначает необходимою функцию в зависимости от входных параметров.
         Option QueryExperiment(string nameExperiment, string token);
         //Отдает все результаты.
-        public List<UserOptions> GetStatistic();
+        public List<DeviceOption> GetStatistic();
     }
 }

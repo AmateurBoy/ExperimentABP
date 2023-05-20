@@ -13,10 +13,7 @@ namespace ExperimentABP.Data
     /// </summary>
     public interface IDatabaseManager
     {
-        /// <summary>
-        /// Для удобстав разработки, метод  для пересоздания таблиц.
-        /// </summary>
-        void RecreateDefoltsValueTables();
+        
         /// <summary>
         /// Create<br></br>
         /// Создать новое устройство если такого еще нет.<br></br>
@@ -24,7 +21,7 @@ namespace ExperimentABP.Data
         /// </summary>
         /// <param name="diveceToken">diveceToken для создания сущности User</param>
         /// <returns>Возвращает сущность User</returns>
-        User CreateDevice(string diveceToken);
+        Device CreateDevice(string diveceToken);
         /// <summary>
         /// Create<br></br>
         /// Присвоение устройству назначеной опции<br></br>
@@ -32,7 +29,7 @@ namespace ExperimentABP.Data
         /// <param name="user">DTO клас для описания сущности.</param>
         /// <param name="option">DTO клас для описания сущности.</param>
         /// <returns>Возвращает id device</returns>
-        UserOptions CreateUserOption(User user, Option option);
+        DeviceOption CreateUserOption(Device user, Option option);
         /// <summary>
         /// Получить из БД сущность Experiment
         /// </summary>
@@ -65,30 +62,31 @@ namespace ExperimentABP.Data
         /// </summary>
         /// <param name="UserId">id сущности User</param>
         /// <returns></returns>
-        UserOptions GetUserOption(int UserId);
+        List<DeviceOption> GetDeviceOptions(int DiveceId);
         /// <summary>
         /// Получть сущность Options<br></br>
         /// </summary>
         /// <param name="experiment">Сущность Experiment</param>
         /// <returns>Список сущностей Option которые зависят от сущности Experiment</returns>
-        List<Option> GetOption(Experiment experiment);
+        List<Option> GetOptions(int ExperimentId);        
         /// <summary>
         /// Получить сущность User
         /// </summary>
         /// <param name="id">id User</param>
         /// <returns>сущность User</returns>
-        User GetUser(int id);
+        Device GetDevice(int id);
         /// <summary>
         /// Получить сущность User
         /// </summary>
         /// <param name="name">имя User</param>
         /// <returns></returns>
-        User GetUser(string name);
+        Device GetDevice(string name);
         /// <summary>
         /// Получить всю колекцию данных про Експереметны.
         /// </summary>        
         /// <returns>Полную всю колекцию зависимостей UserOptions </returns>
-        public List<UserOptions> GetAllUserOptions();
+        public List<DeviceOption> GetAllDeviceOptions();
+
        
     }
 }

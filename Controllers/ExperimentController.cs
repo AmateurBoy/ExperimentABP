@@ -9,17 +9,18 @@ namespace ExperimentABP.Controllers
     [Route("experiment")]
     public class ExperimentController : Controller
     {
-        readonly IDeterminantService determinantService;        
-        public ExperimentController(IDeterminantService determinantService)
+        readonly IDeterminantService determinantService;   
+       
+        public ExperimentController(IDeterminantService determinantService, IDefaultCreator creator)
         {
-            this.determinantService = determinantService;
+            this.determinantService = determinantService;            
         }
 
         [HttpGet("button_color")]
         public IActionResult GetExpirementButtonColor([FromQuery(Name = "device-token")] string deviceToken)
-        {                 
-            var result = ":)";
-            return Json(result);
+        {
+            Option option = determinantService.QueryExperiment("button_color", deviceToken);
+            return Json(option);
         }
         [HttpGet("price")]
         public IActionResult GetExpirementPrice([FromQuery(Name = "device-token")] string deviceToken)

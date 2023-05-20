@@ -27,6 +27,7 @@ namespace ExperimentABP
             //Add DI 
             builder.Services.AddTransient(_ => new SqlConnection(configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddTransient<IDatabaseManager, DatabaseManager>();
+            builder.Services.AddTransient<IDefaultCreator, DatabaseManager>();
             builder.Services.AddTransient<IDeterminantService, DeterminantService>();
             
             var app = builder.Build();
