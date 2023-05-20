@@ -1,4 +1,4 @@
-﻿namespace AB_testsABP.Entitys
+﻿namespace ExperimentABP.Entitys
 {
     public class Experiment
     {

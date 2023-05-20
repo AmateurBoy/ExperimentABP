@@ -1,6 +1,6 @@
-﻿namespace AB_testsABP.Entitys
+﻿namespace ExperimentABP.Entitys
 {
-    public class User
+    public class Device
     {
         public int Id { get; set; }
         public string Name { get; set; }
