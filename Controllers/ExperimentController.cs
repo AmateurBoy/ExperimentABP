@@ -1,29 +1,30 @@
-﻿using AB_testsABP.Entitys;
-using AB_testsABP.Services;
+﻿using ExperimentABP.Data;
+using ExperimentABP.Entitys;
+using ExperimentABP.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AB_testsABP.Controllers
+namespace ExperimentABP.Controllers
 {
     [ApiController]
     [Route("experiment")]
     public class ExperimentController : Controller
     {
-        //Temporarily
-        readonly IDatabaseManager _databaseManager;
-        public ExperimentController(IDatabaseManager databaseManager)
+        readonly IDeterminantService determinantService;        
+        public ExperimentController(IDeterminantService determinantService)
         {
-            this._databaseManager = databaseManager;
+            this.determinantService = determinantService;
         }
 
         [HttpGet("button_color")]
         public IActionResult GetExpirementButtonColor([FromQuery(Name = "device-token")] string deviceToken)
-        {
-           
-            return Json("Hello");
+        {                 
+            var result = ":)";
+            return Json(result);
         }
         [HttpGet("price")]
         public IActionResult GetExpirementPrice([FromQuery(Name = "device-token")] string deviceToken)
         {
+            determinantService.GetStatistic();
             return Json("Hello");
         }
     }

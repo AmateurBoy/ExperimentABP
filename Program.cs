@@ -1,10 +1,11 @@
-using AB_testsABP.Controllers;
-using AB_testsABP.Services;
+using ExperimentABP.Controllers;
+using ExperimentABP.Data;
+using ExperimentABP.Services;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 
-namespace AB_testsABP
+namespace ExperimentABP
 {
     public class Program
     {
@@ -12,12 +13,13 @@ namespace AB_testsABP
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            //Add Configuration 
             var configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
 
+            // Add services to the container.
             builder.Services.AddControllers();            
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -25,6 +27,7 @@ namespace AB_testsABP
             //Add DI 
             builder.Services.AddTransient(_ => new SqlConnection(configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddTransient<IDatabaseManager, DatabaseManager>();
+            builder.Services.AddTransient<IDeterminantService, DeterminantService>();
             
             var app = builder.Build();
 
