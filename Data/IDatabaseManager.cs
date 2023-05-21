@@ -3,88 +3,81 @@
 namespace ExperimentABP.Data
 {
     /// <summary>
-    /// Необходимые методы для решения задачи.<br></br> 
-    /// Создание новых девайсов, Create<br></br> 
-    /// Создание назначение опций для девайсов, Create<br></br> 
-    /// Отдача дивайсов, Read<br></br> 
-    /// Отдача одной назначеной опции для девайса, Read<br></br> 
-    /// Отдача Результатирующей таблици Read<br></br> 
-    /// Для удобстав разработки, метод  для пересоздания таблиц.<br></br> 
+    /// Інтерфейс для моніпуляції з БД в контексті проекту.
     /// </summary>
     public interface IDatabaseManager
     {
-        
+
         /// <summary>
         /// Create<br></br>
-        /// Создать новое устройство если такого еще нет.<br></br>
-        /// Если устройсто уже есть, вернет существующею сущность.
+        /// Створити новий пристрій<br></br>
         /// </summary>
-        /// <param name="diveceToken">diveceToken для создания сущности User</param>
-        /// <returns>Возвращает сущность User</returns>
-        Device CreateDevice(string diveceToken);
+        /// <param name="deviceToken">deviceToken для створення Device</param>
+        /// <returns>Повертає сутність Device</returns>
+        Device CreateDevice(string deviceToken);
         /// <summary>
         /// Create<br></br>
-        /// Присвоение устройству назначеной опции<br></br>
+        /// Присвоєння пристрою назначину опцію<br></br>
         /// </summary>
-        /// <param name="user">DTO клас для описания сущности.</param>
-        /// <param name="option">DTO клас для описания сущности.</param>
-        /// <returns>Возвращает id device</returns>
-        DeviceOption CreateUserOption(Device user, Option option);
+        /// <param name="device">клас для опису сутності.</param>
+        /// <param name="option">клас для опису сутності.</param>
+        /// <returns>Повертає id device</returns>
+        DeviceOption CreateUserOption(Device device, Option option);
         /// <summary>
-        /// Получить из БД сущность Experiment
+        /// Отримати із БД сутність Experiment
         /// </summary>
-        /// <param name="id">id сущности</param>
-        /// <returns>Возваращает сущность UserOption</returns>
+        /// <param name="id">id сутності</param>
+        /// <returns>сутності DeviceOption</returns>
         Experiment GetExperiment(int id);
         /// <summary>
-        /// Получить из БД сущность Experiment
+        /// Отримати из БД сутність Experiment
         /// </summary>
-        /// <param name="name">Имя сущности</param>
-        /// <returns>Возваращает сущность Experiment</returns>
+        /// <param name="name">Імя сутності</param>
+        /// <returns>сутність Experiment</returns>
         Experiment GetExperiment(string name);
         /// <summary>
-        /// Получить из БД сущность Option<br></br>
-        /// Хранит в себе сущность Experiment
+        /// Отримати из БД сутність Option<br></br>
+        /// Зберігае у собі сутність Experiment
         /// </summary>
-        /// <param name="id">id сущности</param>
-        /// <returns>Возваращает сущность Option</returns>
+        /// <param name="id">id сутності</param>
+        /// <returns>сутність Option</returns>
         Option GetOption(int id);
         /// <summary>
-        /// Получить из БД сущность Option<br></br>
-        /// Хранит в себе сущность Experiment
+        /// Отримати з БД суть Option<br></br>
+        /// Зберігає сутність Experiment
         /// </summary>
-        /// <param name="name">Имя сущности</param>
-        /// <returns>Возваращает сущность Option</returns>
+        /// <param name="name">Ім'я сутності</param>
+        /// <returns>Звертає сутність Option</returns>
         Option GetOption(string name);
         /// <summary>
-        /// Получть сущность UserOptions<br></br>
-        /// Хранит в себе сущность User,лист Option
+        /// Отримати сутність UserOptions<br></br>
+        /// Зберігає сутність User,Option
         /// </summary>
-        /// <param name="UserId">id сущности User</param>
+        /// <param name="DiveceId">id сутності User</param>
         /// <returns></returns>
         List<DeviceOption> GetDeviceOptions(int DiveceId);
         /// <summary>
-        /// Получть сущность Options<br></br>
+        /// Отримати сутність Options<br></br>
         /// </summary>
-        /// <param name="experiment">Сущность Experiment</param>
-        /// <returns>Список сущностей Option которые зависят от сущности Experiment</returns>
-        List<Option> GetOptions(int ExperimentId);        
+        /// <param name="experiment">Сутність Experiment</param>
+        /// <returns>Список сутностей Option які залежать від сутності Experiment</returns>
+        List<Option> GetOptions(int ExperimentId);
         /// <summary>
-        /// Получить сущность User
+        /// Отримати сутність Device
         /// </summary>
-        /// <param name="id">id User</param>
-        /// <returns>сущность User</returns>
+        /// <param name="id">id Device</param>
+        /// <returns>сутність Device</returns>
         Device GetDevice(int id);
         /// <summary>
-        /// Получить сущность User
+        /// Отримати сутність Device
         /// </summary>
-        /// <param name="name">имя User</param>
-        /// <returns></returns>
+        /// <param name="name">ім'я User</param>
+        /// <returns>сутність Device</returns>
         Device GetDevice(string name);
         /// <summary>
-        /// Получить всю колекцию данных про Експереметны.
-        /// </summary>        
-        /// <returns>Полную всю колекцию зависимостей UserOptions </returns>
+        /// Отримати усю колекцію даних про Експеременти.
+        /// </summary>
+        /// <returns>Усієї колекції залежностей DeviceOptions</returns>
         public List<DeviceOption> GetAllDeviceOptions();
 
        

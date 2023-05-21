@@ -3,7 +3,9 @@ using ExperimentABP.Data;
 using ExperimentABP.Services;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Configuration;
+using Microsoft.OpenApi.Models;
 using System.Data.SqlClient;
+using System.Reflection;
 
 namespace ExperimentABP
 {
@@ -22,7 +24,15 @@ namespace ExperimentABP
             // Add services to the container.
             builder.Services.AddControllers();            
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("v1", new OpenApiInfo { Title = "ExperimentABP", Version = "v1" });
+
+                // ”кажите путь к файлу XML документации
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                s.IncludeXmlComments(xmlPath);
+            });
             builder.Services.AddMvc();  
             builder.Services.AddSession();
 
@@ -39,7 +49,7 @@ namespace ExperimentABP
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-            }
+            }            
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
