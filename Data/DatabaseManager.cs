@@ -150,15 +150,16 @@ namespace ExperimentABP.Data
                 command.Parameters.AddWithValue("@name", name);
 
                 connection.Open();
-
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
+                
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        user.Name = reader["device-token"].ToString();
-                        user.Id = Convert.ToInt32(reader["Id"]);
-                    }
-                };
+                        if (reader.Read())
+                        {
+                            user.Name = reader["device-token"].ToString();
+                            user.Id = Convert.ToInt32(reader["Id"]);
+                        }
+                    };                    
+                
             };
             return user;
         }

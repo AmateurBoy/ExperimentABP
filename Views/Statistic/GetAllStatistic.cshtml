@@ -23,17 +23,22 @@
     
 }
 <style>
+    body{
+        background-color:navajowhite;
+    }
     table{
         border:solid 1px;
         border-spacing: 10px;
     }
     th{
         border:solid 1px;
+        background-color:bisque;
         
     }
     td{
         border:solid 1px; 
         border-spacing: 10px;
+        background-color:antiquewhite;
     }  
 </style>
 
@@ -58,14 +63,14 @@
             @foreach (var item in Model)
             {
                 if(Allcount >= Model.Count()-1){
-                    color1proc = Convert.ToSingle(color1) / colorCount;
-                    color2proc = Convert.ToSingle(color2) / colorCount;
-                    color3proc = Convert.ToSingle(color3) / colorCount;
+                    color1proc = (Convert.ToSingle(color1) / colorCount) *100;
+                    color2proc = (Convert.ToSingle(color2) / colorCount) * 100;
+                    color3proc = (Convert.ToSingle(color3) / colorCount)*100;
 
-                    price5proc = Convert.ToSingle(price5) / priceCount;
-                    price10proc = Convert.ToSingle(price10) / priceCount;
-                    price20proc = Convert.ToSingle(price20) / priceCount;
-                    price50proc = Convert.ToSingle(price50) / priceCount;
+                    price5proc = (Convert.ToSingle(price5) / priceCount)*100;
+                    price10proc = (Convert.ToSingle(price10) / priceCount)*100;
+                    price20proc = (Convert.ToSingle(price20) / priceCount)*100;
+                    price50proc = (Convert.ToSingle(price50) / priceCount)*100;
                 }
                 
 
@@ -184,19 +189,19 @@
         </tr>
     </thead>
      <tbody>
-
+                        
                 <tr >
-                        <td>
-                                @color1proc
+                    <td>
+                          @color1proc.ToString("0.##")%                               
                     </td>
-                        <td>
-                                @color2proc
+                    <td>
+                          @color2proc.ToString("0.##")%
                     </td>
-                        <td>
-                                @color3proc
+                    <td>
+                          @color3proc.ToString("0.##")%
                     </td>            
                 </tr>
-
+                
     </tbody>
 </table>
 </div>
@@ -260,16 +265,16 @@
 
                 <tr >
                         <td>
-                                @price5proc
+                                @price5proc.ToString("0.##")% 
                     </td>
                         <td>
-                                @price10proc
+                                @price10proc.ToString("0.##")% 
                     </td>
                         <td>
-                                @price20proc
+                                @price20proc.ToString("0.##")% 
                     </td>
                      <td>
-                                @price50proc
+                                @price50proc.ToString("0.##")% 
                     </td>  
                 </tr>
 

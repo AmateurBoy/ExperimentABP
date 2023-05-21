@@ -1,6 +1,7 @@
 ﻿using ExperimentABP.Data;
 using ExperimentABP.Services;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace ExperimentABP.Controllers
 {
@@ -13,7 +14,12 @@ namespace ExperimentABP.Controllers
         {
             this.determinantService = determinantService;
         }
+        /// <summary>
+        /// Создает статистику по експерементам на основе данных из БД
+        /// </summary>
+        /// <remarks>Возвращает View</remarks>
         [HttpGet("all")]
+        [SwaggerOperation]
         public IActionResult GetAllStatistic()
         {
             var result = determinantService.GetStatistic();

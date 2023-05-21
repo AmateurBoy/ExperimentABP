@@ -2,6 +2,7 @@
 using ExperimentABP.Entitys;
 using ExperimentABP.Services;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace ExperimentABP.Controllers
 {
@@ -15,15 +16,24 @@ namespace ExperimentABP.Controllers
         {
             this.determinantService = determinantService;            
         }
-
+        /// <summary>
+        /// Отримати колір кнопки в залежності від device-token
+        /// </summary>        
+        /// <remarks>Повертае пару ключ,значення з результатом, а саме кольором кнопки в залежносі від device-token в JSON форматі</remarks>
         [HttpGet("button_color")]
+        [SwaggerOperation]
         public IActionResult GetExpirementButtonColor([FromQuery(Name = "device-token")] string deviceToken)
         {
             var result = determinantService.QueryExperiment("button_color", deviceToken);
             var KeyValue = new KeyValuePair<string, string>("button_color", result.Name);
             return Json(KeyValue);
         }
+        /// <summary>
+        /// Отримати ціну в залежності від device-token
+        /// </summary>
+        /// <remarks>Повертае пару ключ,значення з результатом, а саме ціну в залежносі від device-token в JSON форматі</remarks>
         [HttpGet("price")]
+        [SwaggerOperation]
         public IActionResult GetExpirementPrice([FromQuery(Name = "device-token")] string deviceToken)
         {
             var result =  determinantService.QueryExperiment("price", deviceToken);
