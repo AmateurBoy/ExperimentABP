@@ -23,7 +23,8 @@ namespace ExperimentABP.Services
             {
                 var divace = _databaseManager.GetDevice(token);
                 var divOpt = _databaseManager.GetDeviceOptions(divace.Id);
-                var option = divOpt.FirstOrDefault(x => x.Option.Experiment.Name == nameExperiment).Option;
+                var option = divOpt.FirstOrDefault(x => x.Option.Experiment.Name == nameExperiment).Option;                
+                
                 return option;
             }
             catch
@@ -34,6 +35,7 @@ namespace ExperimentABP.Services
                 var options = _databaseManager.GetOptions(exper.Id);
                 var option = Classification(nameExperiment, options);
                 _databaseManager.CreateUserOption(divece, option);
+
                 return option;
             }
         }
@@ -60,33 +62,40 @@ namespace ExperimentABP.Services
             if (nameExperiment == "price")
             {
                 var resultProc = GetPercentQuery(100);
-                //5%
                 if (resultProc <= 5)
                 {
-                    result = list.FirstOrDefault(x => x.Name == "50");
+                    result = list.First(x => x.Name == "50");
                 }
-                //10%
-                if (resultProc <= 15 && resultProc > 5)
+                else if (resultProc <= 15)
                 {
-                    result = list.FirstOrDefault(x => x.Name == "5");
+                    result = list.First(x => x.Name == "5");
                 }
-                //10%
-                if (resultProc <= 25 && resultProc > 15)
+                else if (resultProc <= 25)
                 {
-                    result = list.FirstOrDefault(x => x.Name == "20");
+                    result = list.First(x => x.Name == "20");
                 }
-                //75%
-                if (resultProc <= 75 && resultProc > 25)
+                else if (resultProc <= 100)
                 {
-                    result = list.FirstOrDefault(x => x.Name == "10");
+                    result = list.First(x => x.Name == "10");
                 }
             }
             return result;
         }
-        public List<DeviceOption> GetStatistic()
+        public List<ResultAllDTO> GetStatistic()
         {
-            
-            return null;
+            var allOptionsDevice = _databaseManager.GetAllDeviceOptions();
+            var resultData =new List<ResultAllDTO>();
+            foreach (var item in allOptionsDevice)
+            {
+                var resDTO = new ResultAllDTO();
+                resDTO.Token = item.Device.Name;
+                resDTO.Option = item.Option.Name;
+                resDTO.Experiment = item.Option.Experiment.Name;
+                resultData.Add(resDTO);
+            }
+
+       
+            return resultData;
         }
         
         
