@@ -1,0 +1,282 @@
+﻿@model IEnumerable<ExperimentABP.Entitys.ResultAllDTO>
+
+@{
+    ViewData["Title"] = "AllData";
+    int Allcount = 0;
+    int priceCount = 0;
+    int colorCount = 0;
+    int color1 = 0;
+    int color2 = 0;
+    int color3 = 0;
+    float color1proc = 0;
+    float color2proc = 0;
+    float color3proc = 0;
+    int price5 = 0;
+    int price10 = 0;
+    int price20 = 0;
+    int price50 = 0;
+    float price5proc = 0;
+    float price10proc = 0;
+    float price20proc = 0;
+    float price50proc = 0;
+    
+    
+}
+<style>
+    table{
+        border:solid 1px;
+        border-spacing: 10px;
+    }
+    th{
+        border:solid 1px;
+        
+    }
+    td{
+        border:solid 1px; 
+        border-spacing: 10px;
+    }  
+</style>
+
+<h1>Get Expirement</h1>
+
+<div style="display: flex; flex-direction: row;">
+<table >
+    <thead>
+        <tr>
+            <th>
+                    @Html.DisplayNameFor(model => model.Token)
+            </th>
+            <th >
+                    @Html.DisplayNameFor(model => model.Experiment)
+            </th>
+            <th>
+                    @Html.DisplayNameFor(model => model.Option)
+            </th>            
+        </tr>
+    </thead>
+    <tbody>
+            @foreach (var item in Model)
+            {
+                if(Allcount >= Model.Count()-1){
+                    color1proc = Convert.ToSingle(color1) / colorCount;
+                    color2proc = Convert.ToSingle(color2) / colorCount;
+                    color3proc = Convert.ToSingle(color3) / colorCount;
+
+                    price5proc = Convert.ToSingle(price5) / priceCount;
+                    price10proc = Convert.ToSingle(price10) / priceCount;
+                    price20proc = Convert.ToSingle(price20) / priceCount;
+                    price50proc = Convert.ToSingle(price50) / priceCount;
+                }
+                
+
+                Allcount++;
+                if (item.Experiment == "button_color") colorCount++;                
+                else if (item.Experiment == "price") priceCount++;
+                
+                if (item.Option == "#FF0000") color1++;
+                else if (item.Option == "#00FF00") color2++;
+                else if (item.Option == "#0000FF") color3++;
+
+                if (item.Option == "5") price5++;
+                else if(item.Option == "10") price10++;
+                else if (item.Option == "20") price20++;
+                else if (item.Option == "50") price50++;
+
+            <tr >
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Token)
+                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Experiment)
+                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Option)
+                </td>            
+            </tr>
+            }
+            
+                
+
+           
+    </tbody>
+</table>
+<div>
+    <div style="margin-left : 20px">
+        <table class="Allcount">
+            <thead>
+                <tr>
+                    <th>
+                            <p>Count Price Experiment</p>
+                    </th>
+                    <th>
+                            <p>Count Color Experiment</p>
+                    </th>
+                    <th >
+                            <p>Count All Experiment</p>
+                    </th>                    
+
+                </tr>
+            </thead>
+             <tbody>
+
+                        <tr >
+                                <td>
+                                    @priceCount
+                            </td>
+                                <td>
+                                    @colorCount
+                            </td>
+                                <td>
+                                    @Allcount
+                            </td>            
+                        </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+<div style="display: flex; flex-direction: row;">
+<div style="margin-top : 20px;margin-left : 20px">
+    <table class="ColorTable">
+    <thead>
+        <tr>
+            <th>
+                    <p>Color 1</p>
+            </th>
+            <th>
+                    <p>Color 2</p>
+            </th>
+            <th >
+                    <p>Color 3</p>
+            </th>                    
+
+        </tr>
+    </thead>
+     <tbody>
+
+                <tr >
+                        <td>
+                            @color1
+                    </td>
+                        <td>
+                            @color2
+                    </td>
+                        <td>
+                            @color3
+                    </td>            
+                </tr>
+
+    </tbody>
+</table>
+    <table class="ColorTableProc">
+    <thead>
+        <tr>
+            <th>
+                    <p>Color 1 Proc</p>
+            </th>
+            <th>
+                    <p>Color 2 Proc</p>
+            </th>
+            <th >
+                    <p>Color 3 Proc</p>
+            </th>                    
+
+        </tr>
+    </thead>
+     <tbody>
+
+                <tr >
+                        <td>
+                                @color1proc
+                    </td>
+                        <td>
+                                @color2proc
+                    </td>
+                        <td>
+                                @color3proc
+                    </td>            
+                </tr>
+
+    </tbody>
+</table>
+</div>
+<div style="margin-top : 20px;margin-left : 20px">
+    <table class="PriceTable">
+    <thead>
+        <tr>
+            <th>
+                    <p>Price 5 == 10% </p>
+            </th>
+            <th>
+                    <p>Price 10 == 75%</p>
+            </th>
+            <th >
+                    <p>Price 20 == 10%</p>
+            </th>
+            <th >
+                    <p>Price 50 == 5%</p>
+            </th>   
+
+        </tr>
+    </thead>
+     <tbody>
+
+                <tr >
+                        <td>
+                                @price5
+                    </td>
+                        <td>
+                                @price10
+                    </td>
+                        <td>
+                                @price20
+                    </td>
+                     <td>
+                                @price50
+                    </td>  
+                </tr>
+
+    </tbody>
+</table>
+<table class="PriceTable">
+    <thead>
+        <tr>
+            <th>
+                    <p>Price 5 proc</p>
+            </th>
+            <th>
+                    <p>Price 10 proc</p>
+            </th>
+            <th >
+                    <p>Price 20 proc</p>
+            </th>
+            <th >
+                    <p>Price 50 proc</p>
+            </th>   
+
+        </tr>
+    </thead>
+     <tbody>
+
+                <tr >
+                        <td>
+                                @price5proc
+                    </td>
+                        <td>
+                                @price10proc
+                    </td>
+                        <td>
+                                @price20proc
+                    </td>
+                     <td>
+                                @price50proc
+                    </td>  
+                </tr>
+
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+
+

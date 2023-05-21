@@ -214,7 +214,7 @@ namespace ExperimentABP.Data
         }
         public List<Option> GetOptions(int ExperimentId)
         {
-            List<Option> options = new();
+            List<Option> options = new List<Option>();
             var experiment = GetExperiment(ExperimentId);
             using (SqlConnection connection = new SqlConnection(_conector.ConnectionString))
             {
@@ -364,13 +364,15 @@ namespace ExperimentABP.Data
                         var divOpt = new DeviceOption();
                         divOpt.Option = new Option();
                         divOpt.Device = new Device();
+                        divOpt.Option.Experiment = new Experiment();
 
                         divOpt.Id = Convert.ToInt32(reader["DevOptId"]);
                         divOpt.Device.Id = Convert.ToInt32(reader["deviceId"]);
                         divOpt.Device.Name = reader["device-token"].ToString();
                         divOpt.Option.Id = Convert.ToInt32(reader["optionId"]);
                         divOpt.Option.Name = reader["optionName"].ToString();
-
+                        divOpt.Option.Experiment.Id = Convert.ToInt32(reader["experimentId"]);
+                        divOpt.Option.Experiment.Name = reader["experimentName"].ToString();
                         DiveceOptions.Add(divOpt);
                     }
                 };
@@ -502,7 +504,7 @@ namespace ExperimentABP.Data
                 }
             }
         }
-        public void RemoverToTablets()
+        public void RemoveTablets()
         {
             using (SqlConnection connection = new SqlConnection(_conector.ConnectionString))
             {

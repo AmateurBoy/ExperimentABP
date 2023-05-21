@@ -23,6 +23,8 @@ namespace ExperimentABP
             builder.Services.AddControllers();            
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddMvc();  
+            builder.Services.AddSession();
 
             //Add DI 
             builder.Services.AddTransient(_ => new SqlConnection(configuration.GetConnectionString("DefaultConnection")));

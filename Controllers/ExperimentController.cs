@@ -19,14 +19,16 @@ namespace ExperimentABP.Controllers
         [HttpGet("button_color")]
         public IActionResult GetExpirementButtonColor([FromQuery(Name = "device-token")] string deviceToken)
         {
-            Option option = determinantService.QueryExperiment("button_color", deviceToken);
-            return Json(option);
+            var result = determinantService.QueryExperiment("button_color", deviceToken);
+            var KeyValue = new KeyValuePair<string, string>("button_color", result.Name);
+            return Json(KeyValue);
         }
         [HttpGet("price")]
         public IActionResult GetExpirementPrice([FromQuery(Name = "device-token")] string deviceToken)
         {
-            determinantService.GetStatistic();
-            return Json("Hello");
+            var result =  determinantService.QueryExperiment("price", deviceToken);
+            var KeyValue = new KeyValuePair<string, string>("price", result.Name);
+            return Json(KeyValue);
         }
     }
 }

@@ -13,7 +13,7 @@
         /// <summary>
         /// Очистка дефолтных таблиц.
         /// </summary>
-        void RemoverToTablets();
+        void RemoveTablets();
         
 
 
